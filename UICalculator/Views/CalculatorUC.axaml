@@ -7,23 +7,113 @@
              x:Class="UICalculator.Views.CalculatorUC"
 			 x:DataType="vm:CalculatorUCViewModel">
 
-	<Grid>
+	<UserControl.Styles>
 
-		<Grid.RowDefinitions>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-		</Grid.RowDefinitions>
+		<Style Selector="HeaderedContentControl">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate>
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Border ZIndex="1" Padding="5,0,5,0" Background="White" Margin="5,0,0,0">
+								<TextBlock TextBlock.FontWeight="Bold" Text="{TemplateBinding Header}"/>
+							</Border>
+							<Border Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="0,10,0,0"
+									BorderBrush="{TemplateBinding Background}"
+									CornerRadius="5"
+									BorderThickness="1">
+								<ContentPresenter Content="{TemplateBinding Content}" />
+							</Border>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+	</UserControl.Styles>
+
+	<Grid>
 
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
-			<ColumnDefinition/>
+			<ColumnDefinition Width="2*"/>
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
-		
-		
+
+		<Grid Grid.Column="1" VerticalAlignment="Center">
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+
+			<TextBlock Grid.Row="0" Grid.ColumnSpan="3"
+					   Text="Выберите арифметическую операцию"
+					   TextAlignment="Center" Margin="0 0 0 20"/>
+			
+			<ComboBox Grid.Row="1" Grid.ColumnSpan="3"
+					  x:Name="MathematicalActionsComboBox"
+					  HorizontalAlignment="Stretch"
+					  Height="60" Margin="0 0 0 20"
+					  ItemsSource="{Binding AvailableMathematicalActions}"
+					  SelectedItem="{Binding SelectedFunction}"/>
+
+			<TextBox Grid.Row="2" Grid.Column="0"
+					 Height="60" Margin="0 0 0 20"
+					 VerticalContentAlignment="Center"
+					 Text="{Binding Value1}"/>
+			
+			<TextBlock Grid.Row="2" Grid.Column="1"
+					   Text="{Binding ElementName=MathematicalActionsComboBox
+					   , Path=SelectedItem.FunctionMark}" HorizontalAlignment="Center"
+					   VerticalAlignment="Center" FontSize="18"
+					   Margin="0 0 0 20"/>
+			
+			<TextBox Grid.Row="2" Grid.Column="2"
+					 Height="60" Margin="0 0 0 20"
+					 VerticalContentAlignment="Center"
+					 Text="{Binding Value2}"/>
+
+			<Button Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3"
+					HorizontalAlignment="Stretch" Height="60"
+					Classes="Outline" Margin="0 0 0 20"
+					Command="{Binding CalculateMathFunctionCommand}">
+
+				<TextBlock Text="Вычислить" FontSize="20"/>
+				
+			</Button>
+
+			<HeaderedContentControl Header="Результат" Grid.ColumnSpan="3"
+									Grid.Row="4" HorizontalAlignment="Stretch"
+									Background="Black">
+
+				<Border Height="60">
+					
+					<TextBlock FontSize="18" Text="{Binding Result}"
+							   VerticalAlignment="Center"
+							   Padding="15 0 10 0"/>
+					
+				</Border>
+
+			</HeaderedContentControl>
+
+		</Grid>
 		
 	</Grid>
 

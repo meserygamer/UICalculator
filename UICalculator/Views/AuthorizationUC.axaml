@@ -35,10 +35,6 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-
-		<Style Selector="Button.Outline:pressed">
-			<Setter Property="Foreground" Value="Black"/>
-		</Style>
 		
 	</UserControl.Styles>
 	
