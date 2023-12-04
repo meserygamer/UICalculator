@@ -1,0 +1,39 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:UICalculator.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:v="clr-namespace:UICalculator.Views"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="UICalculator.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="UICalculator">
+
+	<Window.Styles>
+
+		<Style Selector="ContentControl.MainContentControl.AuthPage">
+			<Setter Property="Content">
+			</Setter>
+		</Style>
+
+		<Style Selector="ContentControl.MainContentControl.CalcPage">
+			<Setter Property="Content">
+
+			</Setter>
+		</Style>
+		
+	</Window.Styles>
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+	<Grid>
+
+		<!--<ContentControl Classes.MainContentControl.AuthPage="{Binding }"
+						Classes.MainContentControl.CalcPage="{Binding }"/>-->
+		
+	</Grid>
+
+</Window>
