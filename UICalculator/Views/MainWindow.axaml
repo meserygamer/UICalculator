@@ -8,14 +8,15 @@
         x:Class="UICalculator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="UICalculator">
+        Title="UICalculator"
+		Background="White">
 
 	<Window.Styles>
 
 		<Style Selector="ContentControl.MainContentControl_AuthPage">
 			<Setter Property="Template">
 				<ControlTemplate>
-					<v:AuthorizationUC/>
+					<v:AuthorizationUC DataContext="{Binding AuthorizationUCViewModel}"/>
 				</ControlTemplate>
 			</Setter>
 		</Style>
@@ -23,7 +24,7 @@
 		<Style Selector="ContentControl.MainContentControl_CalcPage">
 			<Setter Property="Template">
 				<ControlTemplate>
-					<v:CalculatorUC/>
+					<v:CalculatorUC DataContext="{Binding CalculatorUCViewModel}"/>
 				</ControlTemplate>
 			</Setter>
 		</Style>

@@ -9,15 +9,37 @@ namespace UICalculator.ViewModels
             get => _isAuthorizationPage;
             set => this.RaiseAndSetIfChanged(ref _isAuthorizationPage, value);
         }
-
         public bool IsCalculatorPage
         {
             get => _isCalculatorPage;
             set => this.RaiseAndSetIfChanged(ref _isCalculatorPage, value);
         }
 
-        private bool _isAuthorizationPage = false;
+        public AuthorizationUCViewModel AuthorizationUCViewModel
+        {
+            get => _authorizationUCViewModel;
+            set => this.RaiseAndSetIfChanged(ref _authorizationUCViewModel, value);
+        }
 
-        private bool _isCalculatorPage = true;
+        public CalculatorUCViewModel CalculatorUCViewModel
+        {
+            get => _calculatorUCViewModel;
+            set => this.RaiseAndSetIfChanged(ref _calculatorUCViewModel, value);
+        }
+
+
+        public MainWindowViewModel()
+        {
+            AuthorizationUCViewModel = new AuthorizationUCViewModel();
+            CalculatorUCViewModel = new CalculatorUCViewModel();
+        }
+
+
+        private bool _isAuthorizationPage = true;
+        private bool _isCalculatorPage = false;
+
+        private AuthorizationUCViewModel _authorizationUCViewModel;
+
+        private CalculatorUCViewModel _calculatorUCViewModel;
     }
 }
