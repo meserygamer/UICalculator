@@ -12,14 +12,19 @@
 
 	<Window.Styles>
 
-		<Style Selector="ContentControl.MainContentControl.AuthPage">
-			<Setter Property="Content">
+		<Style Selector="ContentControl.MainContentControl_AuthPage">
+			<Setter Property="Template">
+				<ControlTemplate>
+					<v:AuthorizationUC/>
+				</ControlTemplate>
 			</Setter>
 		</Style>
 
-		<Style Selector="ContentControl.MainContentControl.CalcPage">
-			<Setter Property="Content">
-
+		<Style Selector="ContentControl.MainContentControl_CalcPage">
+			<Setter Property="Template">
+				<ControlTemplate>
+					<v:CalculatorUC/>
+				</ControlTemplate>
 			</Setter>
 		</Style>
 		
@@ -31,8 +36,8 @@
 
 	<Grid>
 
-		<!--<ContentControl Classes.MainContentControl.AuthPage="{Binding }"
-						Classes.MainContentControl.CalcPage="{Binding }"/>-->
+		<ContentControl Classes.MainContentControl_AuthPage="{Binding IsAuthorizationPage}"
+						Classes.MainContentControl_CalcPage="{Binding IsCalculatorPage}"/>
 		
 	</Grid>
 
