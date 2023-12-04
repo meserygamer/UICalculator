@@ -8,8 +8,7 @@
         x:Class="UICalculator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="UICalculator"
-		Background="White">
+        Title="UICalculator">
 
 	<Window.Styles>
 

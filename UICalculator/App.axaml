@@ -1,15 +1,19 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="UICalculator.App"
+			 xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles"
              xmlns:local="using:UICalculator"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+             RequestedThemeVariant="Light">
+
+	<Application.Styles>
+		<themes:MaterialTheme BaseTheme="Light" PrimaryColor="Blue" SecondaryColor="Lime" />
+	</Application.Styles>
 
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
   
     <Application.Styles>
-        <FluentTheme />
+        <FluentTheme  />
     </Application.Styles>
 </Application>

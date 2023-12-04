@@ -4,6 +4,12 @@ namespace UICalculator.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        public MainWindowViewModel()
+        {
+            AuthorizationUCViewModel.NotifyAuthorizationWasSuccessComplete += AuthorizationUCViewModel_NotifyAuthorizationWasSuccessComplete;
+        }
+
+
         public bool IsAuthorizationPage
         {
             get => _isAuthorizationPage;
@@ -28,18 +34,18 @@ namespace UICalculator.ViewModels
         }
 
 
-        public MainWindowViewModel()
-        {
-            AuthorizationUCViewModel = new AuthorizationUCViewModel();
-            CalculatorUCViewModel = new CalculatorUCViewModel();
-        }
-
-
         private bool _isAuthorizationPage = true;
         private bool _isCalculatorPage = false;
 
-        private AuthorizationUCViewModel _authorizationUCViewModel;
+        private AuthorizationUCViewModel _authorizationUCViewModel = new AuthorizationUCViewModel();
 
-        private CalculatorUCViewModel _calculatorUCViewModel;
+        private CalculatorUCViewModel _calculatorUCViewModel = new CalculatorUCViewModel();
+
+
+        private void AuthorizationUCViewModel_NotifyAuthorizationWasSuccessComplete()
+        {
+            IsAuthorizationPage = false;
+            IsCalculatorPage = true;
+        }
     }
 }

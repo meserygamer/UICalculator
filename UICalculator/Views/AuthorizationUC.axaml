@@ -6,8 +6,92 @@
 			 xmlns:vm="using:UICalculator.ViewModels"
              x:Class="UICalculator.Views.AuthorizationUC"
 			 x:DataType="vm:AuthorizationUCViewModel">
+
+	<UserControl.Styles>
+
+		<Style Selector="HeaderedContentControl">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate>
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Border ZIndex="1" Padding="5,0,5,0" Background="White" Margin="5,0,0,0">
+								<TextBlock TextBlock.FontWeight="Bold" Text="{TemplateBinding Header}" />
+							</Border>
+							<Border Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="0,10,0,0"
+									BorderBrush="{TemplateBinding Background}"
+									BorderThickness="1">
+								<ContentPresenter Content="{TemplateBinding Content}" />
+							</Border>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<Style Selector="Button.Outline:pressed">
+			<Setter Property="Foreground" Value="Black"/>
+		</Style>
+		
+	</UserControl.Styles>
 	
-	<TextBlock Text="Я авторизация" HorizontalAlignment="Center"
-			   VerticalAlignment="Center"/>
+	<Grid VerticalAlignment="Center"
+		  HorizontalAlignment="Stretch">
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+
+		<HeaderedContentControl Header="Логин"
+								Grid.Column="1"
+								Grid.Row="0"
+								Margin="0 0 0 30">
+
+			<TextBox Height="60" FontSize="18" Padding="15 0 10 0"
+					 VerticalContentAlignment="Center"
+					 Text="{Binding Login}"/>
+
+		</HeaderedContentControl>
+
+		<HeaderedContentControl Header="Пароль"
+								Grid.Column="1"
+								Grid.Row="1"
+								Margin="0 0 0 30">
+
+			<TextBox Height="60" PasswordChar="*" FontSize="18"
+					 VerticalContentAlignment="Center" Padding="15 0 10 0"
+					 Text="{Binding Password}"/>
+
+		</HeaderedContentControl>
+
+		<Button Grid.Column="1" Classes="Outline"
+				Grid.Row="2"
+				HorizontalAlignment="Stretch"
+				Height="60"
+				BorderBrush="#0078d7"
+				Foreground="#0078d7"
+				Command="{Binding DoAuthorizationCommand}"
+				CommandParameter="Hello">
+			
+			<TextBlock Text="Войти" FontSize="20"/>
+			
+		</Button>
+
+	</Grid>
 	
 </UserControl>
