@@ -2,7 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="750"
+			 xmlns:v="clr-namespace:UICalculator.Views"
 			 xmlns:vm="using:UICalculator.ViewModels"
              x:Class="UICalculator.Views.AuthorizationUC"
 			 x:DataType="vm:AuthorizationUCViewModel">
@@ -39,7 +40,9 @@
 	</UserControl.Styles>
 	
 	<Grid VerticalAlignment="Center"
-		  HorizontalAlignment="Stretch">
+		  HorizontalAlignment="Stretch"
+		  Margin="0 30 0 0"
+		  IsEnabled="{Binding IsInterfaceEnabled}">
 
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
@@ -51,6 +54,7 @@
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="auto"/>
+			<RowDefinition/>
 		</Grid.RowDefinitions>
 
 		<HeaderedContentControl Header="Логин"
@@ -76,6 +80,7 @@
 		</HeaderedContentControl>
 
 		<Button Grid.Column="1" Classes="Outline"
+				IsVisible="{Binding !IsLastEnterWasFailed}"
 				Grid.Row="2"
 				HorizontalAlignment="Stretch"
 				Height="60"
@@ -87,6 +92,16 @@
 			<TextBlock Text="Войти" FontSize="20"/>
 			
 		</Button>
+
+		<ContentControl Grid.Row="3" Grid.Column="1"
+						Margin="0 30 0 0" Height="400" Width="400"
+						IsVisible="{Binding IsLastEnterWasFailed}">
+			
+			<v:CaptchaUC VerticalAlignment="Stretch"
+						 HorizontalAlignment="Stretch"
+						 DataContext="{Binding CaptchaUCViewModel}"/>
+			
+		</ContentControl>
 
 	</Grid>
 	

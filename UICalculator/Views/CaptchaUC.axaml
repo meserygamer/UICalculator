@@ -1,0 +1,49 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="using:UICalculator.ViewModels"
+			 x:DataType="vm:CaptchaUCViewModel"
+             x:Class="UICalculator.Views.CaptchaUC">
+
+	<Grid>
+
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+
+		<Border BorderBrush="Black" BorderThickness="1"
+				Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0">
+			
+			<UserControl Content="{Binding CaptchaCanvas}"
+						 HorizontalAlignment="Stretch"
+						 VerticalAlignment="Stretch"/>
+			
+		</Border>
+		
+		<TextBox Grid.Row="1" Grid.Column="1" Margin="0 30 0 0"
+				 Text="{Binding UserInputText}"/>
+
+		<Button Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2"
+				Margin="0 30 0 10" Height="60"
+				HorizontalAlignment="Stretch"
+				Command="{Binding CheckCaptchaCommand}"
+				Classes="Outline" BorderBrush="#0078d7"
+				Foreground="#0078d7">
+
+			<TextBlock Text="Войти"/>
+			
+		</Button>
+		
+	</Grid>
+	
+</UserControl>
