@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Reactive;
 using Avalonia.Threading;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Dto;
+using MsBox.Avalonia.Enums;
 using ReactiveUI;
 using UICalculator.Models;
 
@@ -92,8 +95,16 @@ namespace UICalculator.ViewModels
 				&& Login == AuthorizationData.CurrectlyLogin)
 			{
                 NotifyAuthorizationWasSuccessComplete();
+                IsLastEnterWasFailed = false;
                 return;
 			}
+            Login = "";
+            Password = "";
+            MessageBoxManager.GetMessageBoxStandard( "Провал авторизации!"
+                                                    ,"Неверно введен логин и пароль"
+                                                    ,ButtonEnum.Ok
+                                                    ,Icon.Error)
+                             .ShowAsync();
             IsLastEnterWasFailed = true;
             return;
 		}
@@ -128,6 +139,29 @@ namespace UICalculator.ViewModels
         /// </summary>
         private void onCaptchaWasFailed()
         {
+            Login = "";
+            Password = "";
+            MessageBoxManager.GetMessageBoxStandard( "Провал капчи!"
+                                                    ,"Неверно введена капча"
+                                                    ,ButtonEnum.Ok
+                                                    ,Icon.Error)
+                             .ShowAsync();
+            LockInterface();
+        }
+        /// <summary>
+        /// Метод реагирующий на успешное завершение капчи
+        /// </summary>
+        private void onCaptchaWasPassed()
+        {
+            DoAuthorizationCommandRun("");
+            if(IsLastEnterWasFailed)
+            {
+                CaptchaUCViewModel.RegenerateCaptchaCommandRun("");
+                LockInterface();
+            }
+        }
+        private void LockInterface(int durationSeconds = 10)
+        {
             DispatcherTimer DP = new DispatcherTimer();
             DP.Interval = new TimeSpan(0, 0, 10);
             DP.Tick += new EventHandler((a, b) =>
@@ -137,13 +171,6 @@ namespace UICalculator.ViewModels
             });
             IsInterfaceEnabled = false;
             DP.Start();
-        }
-        /// <summary>
-        /// Метод реагирующий на успешное завершение капчи
-        /// </summary>
-        private void onCaptchaWasPassed()
-        {
-            DoAuthorizationCommandRun("");
         }
     }
 }

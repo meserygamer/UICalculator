@@ -71,14 +71,17 @@ namespace UICalculator.ViewModels
 				CapchaWasPassed?.Invoke();
 				return;
 			}
-			CaptchaCanvas.Children.Clear();
 			RegenerateCaptchaCommandRun("");
 			CapchaWasFailed?.Invoke();
 			return;
 		}
 		public void RegenerateCaptchaCommandRun(string parameter)
 		{
-			Random random = new Random((int)DateTime.Now.Ticks);
+			UserInputText = "";
+
+            CaptchaCanvas.Children.Clear();
+
+            Random random = new Random((int)DateTime.Now.Ticks);
             CaptchaText = new string (Enumerable.Repeat(CAPTCHA_CHARS, CAPTHCA_LENGHT).Select(s => s[random.Next(s.Length)]).ToArray());
 
 			for(int i = 0; i < CAPTHCA_NOISE_QUANTITY; i++)
@@ -108,6 +111,21 @@ namespace UICalculator.ViewModels
 					[Canvas.TopProperty] = random.Next(20, 300 - 80),
                 };
 				coordinateXSymbols += 50;
+
+				switch(random.Next(0,3))
+				{
+					case 0:
+						textBlock.FontStyle = FontStyle.Italic;
+						break;
+					case 1:
+						textBlock.FontWeight = FontWeight.Bold;
+						break;
+					case 2:
+                        textBlock.FontStyle = FontStyle.Italic;
+                        textBlock.FontWeight = FontWeight.Bold;
+                        break;
+                }
+
                 CaptchaCanvas.Children.Add(textBlock);
             }
 

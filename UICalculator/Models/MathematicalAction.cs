@@ -8,9 +8,9 @@ namespace UICalculator.Models
 {
     public class MathematicalFunction
     {
-        public MathematicalFunction(Func<double, double, double> func
-            , string functionMark
-            , string functionName)
+        public MathematicalFunction( Func<double, double, double> func
+                                    ,string functionMark
+                                    ,string functionName)
         {
             Func = func;
             FunctionMark = functionMark;
